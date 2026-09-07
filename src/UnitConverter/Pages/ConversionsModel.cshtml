@@ -1,7 +1,7 @@
 ﻿@page
 @using Microsoft.AspNetCore.Mvc.RazorPages
 @using Microsoft.VisualBasic
-@model UnitConverter.Conversion
+@model UnitConverter.Conversion;
 
 @{
 }
@@ -14,14 +14,14 @@
 </head>
 <body>
 <div>
+
+    <!--Adds header "Miles to Kilometers -->
     <h1>@ViewData["ConversionType"]</h1>
 
-
-    <h4><br/>Input: @Model.Input meters</h4>
-    <h4>Output: @Model.Output kilometers</h4>
-
-
-
+    <!--Adds the input value form the cs class and the output value
+    from cs class to be displayed on webpage. -->
+    <h5><br/>Input: @Model.Input miles</h5>
+    <h5>Output: @Model.Output kilometers</h5>
 
 </div>
 </body>
