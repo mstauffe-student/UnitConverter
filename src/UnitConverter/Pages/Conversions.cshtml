@@ -1,8 +1,7 @@
-﻿@page
+﻿@page "/Conversions/{conversionType=MilesToKilometers}/{input=10}"
 @using Microsoft.AspNetCore.Mvc.RazorPages
 @using Microsoft.VisualBasic
 @model UnitConverter.ConversionsModel;
-
 
 @{
 }
@@ -16,13 +15,13 @@
 <body>
 <div>
 
-    <!--Adds header "Miles to Kilometers -->
+    <!--Adds header -->
     <h1>@ViewData["ConversionType"]</h1>
 
     <!--Adds the input value form the cs class and the output value
     from cs class to be displayed on webpage. -->
-    <h5><br/>Input: @Model.Input miles</h5>
-    <h5>Output: @Model.Output kilometers</h5>
+    <h5><br/>Input: @Model.Input </h5>
+    <h5>Output: @Model.Output </h5>
 
 </div>
 </body>
