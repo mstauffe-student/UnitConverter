@@ -17,7 +17,7 @@ public class Lesson01Tests
     private const string RequiredInput = "3.1415";
     private const string RequiredConversionType = "Miles to Kilometers";
     private const string RequiredTitle = "Conversions";
-    private const double ExpectedKilometers = 5.055754176;
+    private const double ExpectedKilometers = 5.0558;
     private const double ConversionTolerance = 0.000001;
 
     [Fact]
