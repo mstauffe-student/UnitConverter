@@ -15,13 +15,17 @@
 <body>
 <div>
 
-    <!--Adds header -->
-    <h1>@ViewData["ConversionType"]</h1>
+<!--Adds header -->
+<h1>@ViewData["ConversionType"]</h1>
+
+<!--Adds an error message if something goes wrong-->
+<p class="text-danger">@ViewData["ErrorMessage"]</p>
 
     <!--Adds the input value form the cs class and the output value
     from cs class to be displayed on webpage. -->
-    <h5><br/>Input: @Model.Input </h5>
-    <h5>Output: @Model.Output </h5>
+    <h5><br/>Input: @Model.Input @Model.InputType</h5>
+    <h5>Output: @Model.Output @Model.OutputType (rounded)</h5>
+
 
 </div>
 </body>
