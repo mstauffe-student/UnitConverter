@@ -19,37 +19,54 @@ public class ConversionsModel : PageModel
     public string OutputType = string.Empty;
 
 
-    public void OnGet(string input, string conversionType)
+    public void OnGet()
     {
         ViewData["Title"] = "Conversions";
 
-        Boolean error = false;
-        ViewData["ErrorMessage"] = string.Empty;
+        Boolean inputError = false;
+        Boolean conversionError = false;
+        ViewData["ErrorMessage"] = "";
 
-        Input = input;
+        string input = Input;
+        string conversionType = ConversionType;
+
         double inputConversion = 0;
 
+        //Checks for input error. Catches it if it happens to stop it from crashing.
         try
         {
-            inputConversion = Convert.ToDouble(Input);
+            inputConversion = Convert.ToDouble(input);
         }
         catch (Exception e)
         {
-            error = true;
+            inputError = true;
             Input = "0";
             Console.WriteLine("Invalid input: must be a number. " + e.Message);
         }
 
 
-        //line below tranforms Input into a double
+        //line below will represent the new, converted input
         double newInput = 0;
 
+        /*Takes a conversion type and input given. Converts input based on conversion type.
+         If the conversion type is invalid or unsupported, a warning will show.*/
         if (conversionType.ToLower() == "milestokilometers")
         {
             ViewData["ConversionType"] = "Miles to Kilometers";
             //next 2 lines below takes inputConversion and turns it from miles to kilometers
             UnitOf.Length unit = new UnitOf.Length().FromMiles(inputConversion);
             newInput = unit.ToKilometers();
+
+            /*It doesn't make sense for negative values here. This if takes values and
+             ensures input and output will be positive. A negative number multiplied by
+             -1 will become positive and stay the same number.*/
+            if (newInput < 0)
+            {
+                newInput *= -1;
+                double positiveInput = Convert.ToDouble(Input);
+                positiveInput *= -1;
+                Input = positiveInput.ToString();
+            }
 
             InputType = "miles";
             OutputType = "Kilometers";
@@ -60,6 +77,17 @@ public class ConversionsModel : PageModel
             //next 2 lines below takes inputConversion and turns it from kilometers to miles
             UnitOf.Length unit = new UnitOf.Length().FromKilometers(inputConversion);
             newInput = unit.ToMiles();
+
+            /*It doesn't make sense for negative values here. This if takes values and
+             ensures input and output will be positive. A negative number multiplied by
+             -1 will become positive and stay the same number.*/
+            if (newInput < 0)
+            {
+                newInput *= -1;
+                double positiveInput = Convert.ToDouble(Input);
+                positiveInput *= -1;
+                Input = positiveInput.ToString();
+            }
 
             InputType = "kilometers";
             OutputType = "miles";
@@ -91,6 +119,17 @@ public class ConversionsModel : PageModel
             UnitOf.Mass unit = new UnitOf.Mass().FromPounds(inputConversion);
             newInput = unit.ToKilograms();
 
+            /*It doesn't make sense for negative values here. This if takes values and
+             ensures input and output will be positive. A negative number multiplied by
+             -1 will become positive and stay the same number.*/
+            if (newInput < 0)
+            {
+                newInput *= -1;
+                double positiveInput = Convert.ToDouble(Input);
+                positiveInput *= -1;
+                Input = positiveInput.ToString();
+            }
+
             InputType = "pounds";
             OutputType = "kilograms";
         }
@@ -101,71 +140,139 @@ public class ConversionsModel : PageModel
             UnitOf.Mass unit = new UnitOf.Mass().FromKilograms(inputConversion);
             newInput = unit.ToPounds();
 
+            /*It doesn't make sense for negative values here. This if takes values and
+             ensures input and output will be positive. A negative number multiplied by
+             -1 will become positive and stay the same number.*/
+            if (newInput < 0)
+            {
+                newInput *= -1;
+                double positiveInput = Convert.ToDouble(Input);
+                positiveInput *= -1;
+                Input = positiveInput.ToString();
+            }
+
             InputType = "kilograms";
             OutputType = "pounds";
         }
         else if (conversionType.ToLower() == "bitstobytes")
         {
-            ViewData["ConversionType"] = "Bits To Bytes";
+            ViewData["ConversionType"] = "Bits to Bytes";
             //next 2 lines below takes inputConversion and turns it from bytes to gigabytes
             UnitOf.DataStorage unit = new UnitOf.DataStorage().FromBits(inputConversion);
             newInput = unit.ToBytes();
+
+            /*It doesn't make sense for negative values here. This if takes values and
+             ensures input and output will be positive. A negative number multiplied by
+             -1 will become positive and stay the same number.*/
+            if (newInput < 0)
+            {
+                newInput *= -1;
+                double positiveInput = Convert.ToDouble(Input);
+                positiveInput *= -1;
+                Input = positiveInput.ToString();
+            }
 
             InputType = "bits";
             OutputType = "bytes";
         }
         else if (conversionType.ToLower() == "bytestobits")
         {
-            ViewData["ConversionType"] = "Bytes To Bits";
+            ViewData["ConversionType"] = "Bytes to Bits";
             //next 2 lines below takes inputConversion and turns it from gigabytes to bytes
             UnitOf.DataStorage unit = new UnitOf.DataStorage().FromBytes(inputConversion);
             newInput = unit.ToBits();
+
+            /*It doesn't make sense for negative values here. This if takes values and
+             ensures input and output will be positive. A negative number multiplied by
+             -1 will become positive and stay the same number.*/
+            if (newInput < 0)
+            {
+                newInput *= -1;
+                double positiveInput = Convert.ToDouble(Input);
+                positiveInput *= -1;
+                Input = positiveInput.ToString();
+            }
 
             InputType = "bytes";
             OutputType = "bits";
         }
         else if (conversionType.ToLower() == "minutestohours")
         {
-            ViewData["ConversionType"] = "Minutes To Hours";
+            ViewData["ConversionType"] = "Minutes to Hours";
             //next 2 lines below takes inputConversion and turns it from minutes to hours
             UnitOf.Time unit = new UnitOf.Time().FromMinutes(inputConversion);
             newInput = unit.ToHours();
+
+            /*It doesn't make sense for negative values here. This if takes values and
+             ensures input and output will be positive. A negative number multiplied by
+             -1 will become positive and stay the same number.*/
+            if (newInput < 0)
+            {
+                newInput *= -1;
+                double positiveInput = Convert.ToDouble(Input);
+                positiveInput *= -1;
+                Input = positiveInput.ToString();
+            }
 
             InputType = "minutes";
             OutputType = "hours";
         }
         else if (conversionType.ToLower() == "hourstominutes")
         {
-            ViewData["ConversionType"] = "Hours To Minutes";
+            ViewData["ConversionType"] = "Hours to Minutes";
             //next 2 lines below takes inputConversion and turns it from hours to minutes
             UnitOf.Time unit = new UnitOf.Time().FromHours(inputConversion);
             newInput = unit.ToMinutes();
+
+            /*It doesn't make sense for negative values here. This if takes values and
+             ensures input and output will be positive. A negative number multiplied by
+             -1 will become positive and stay the same number.*/
+            if (newInput < 0)
+            {
+                newInput *= -1;
+                double positiveInput = Convert.ToDouble(Input);
+                positiveInput *= -1;
+                Input = positiveInput.ToString();
+            }
 
             InputType = "hours";
             OutputType = "minutes";
         }
         else
         {
-            //This is designed to catch errors in the conversionType part.
+            /* This is designed to catch errors in the conversionType part.
+             View Data for Conversion Type is set to blank. */
             ViewData["ErrorMessage"] = "Unknown or unsupported conversion type. Try again.";
             ViewData["ConversionType"] = "";
             Input = "0";
+            Output = "0";
 
             InputType = "";
             OutputType = "";
+            conversionError = true;
         }
 
-        //line below tales newInput and rounds it.
+        //line below takes newInput and rounds it.
         newInput = Math.Round(newInput, 4);
         //line below takes newInput and gives it to Output as a string
         Output = newInput.ToString();
 
-        if (error)
+        /* This uses the booleans of inputError and conversionError to determine what the
+         ErrorMessage will say. Conversion only issue is solved in the if/else for the
+         conversion types. View Data for Conversion Type is set to blank.*/
+        if (inputError && conversionError)
+        {
+            //If both an input AND a conversion error occurs. This uses ErrorMessage and explains why.
+            ViewData["ErrorMessage"] = "Multiple errors! Invalid input and conversion type. Try Again.";
+            ViewData["ConversionType"] = "";
+        }
+        else if (inputError)
         {
             //If the try/catch for the input has an issue. This uses ErrorMessage and explains why.
             ViewData["ErrorMessage"] = "Invalid input! Must be a valid number. Try Again.";
             ViewData["ConversionType"] = "";
         }
+
     }
 
 }

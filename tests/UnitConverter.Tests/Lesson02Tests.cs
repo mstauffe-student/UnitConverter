@@ -148,7 +148,7 @@ public class Lesson02Tests
 
         string content = await response.Content.ReadAsStringAsync(TestContext.Current.CancellationToken);
 
-        Assert.Contains("MilesToKilometers", content, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("Miles to Kilometers", content, StringComparison.OrdinalIgnoreCase);
 
         Assert.Contains("10", content);
     }
