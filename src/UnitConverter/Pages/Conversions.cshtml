@@ -21,8 +21,8 @@
 <!--Adds an error message to replace the header if something goes wrong-->
         <p class="text-danger">@ViewData["ErrorMessage"]</p>
 
-        <h5><br/>Input: @Model.Input @Model.InputType</h5>
-        <h5>Output: @Model.Output @Model.OutputType (rounded)</h5>
+        <h5><br/>Input: @Model.Conversion.Input @Model.InputType</h5>
+        <h5>Output: @Model.Conversion.Output @Model.OutputType (rounded)</h5>
 
 
     <!--Adds the input value form the cs class and the output value

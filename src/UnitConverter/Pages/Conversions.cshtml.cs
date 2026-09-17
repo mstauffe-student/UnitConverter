@@ -1,22 +1,27 @@
 ﻿using System.Security.Cryptography.X509Certificates;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using UnitConverter.Pages;
 
 
 namespace UnitConverter;
 
 public class ConversionsModel : PageModel
 {
-    [BindProperty(SupportsGet = true)]
-    public string ConversionType { get; set; } = "MilesToKilometers";
+   // [BindProperty(SupportsGet = true)]
+   // public string ConversionType { get; set; } = "MilesToKilometers";
 
-    [BindProperty(SupportsGet = true)]
-    public string Input { get; set; } = "3.1415";
-    public string Output { get; set; } = string.Empty;
+    //[BindProperty(SupportsGet = true)]
+
+   // public string Input { get; set; } = "3.1415";
+   // public string Output { get; set; } = string.Empty;
 
     public string InputType = string.Empty;
 
     public string OutputType = string.Empty;
+
+    [BindProperty(SupportsGet = true)]
+    public ConversionModel Conversion { get; set; } =  new();
 
 
     public void OnGet()
@@ -26,8 +31,8 @@ public class ConversionsModel : PageModel
         Boolean conversionError = false;
         // ViewData["ErrorMessage"] = null;
 
-        string input = Input;
-        string conversionType = ConversionType;
+        string input = Conversion.Input;
+        string conversionType = Conversion.ConversionType;
 
         double inputConversion = 0;
 
@@ -38,7 +43,7 @@ public class ConversionsModel : PageModel
         }
         catch (Exception e)
         {
-            Input = "0";
+            Conversion.Input = "0";
             Console.WriteLine("Invalid input: must be a number. " + e.Message);
             ViewData["ErrorMessage"] = "Invalid input value. Try again.";
             return;
@@ -50,7 +55,7 @@ public class ConversionsModel : PageModel
 
         /*Takes a conversion type and input given. Converts input based on conversion type.
          If the conversion type is invalid or unsupported, a warning will show.*/
-        if (conversionType.ToLower() == "milestokilometers")
+        if (conversionType == ConversionTypes.MilesToKilometers)
         {
             ViewData["ConversionType"] = "Miles to Kilometers";
             //next 2 lines below takes inputConversion and turns it from miles to kilometers
@@ -63,15 +68,15 @@ public class ConversionsModel : PageModel
             if (newInput < 0)
             {
                 newInput *= -1;
-                double positiveInput = Convert.ToDouble(Input);
+                double positiveInput = Convert.ToDouble(Conversion.Input);
                 positiveInput *= -1;
-                Input = positiveInput.ToString();
+                Conversion.Input = positiveInput.ToString();
             }
 
             InputType = "miles";
             OutputType = "Kilometers";
         }
-        else if(conversionType.ToLower() == "kilometerstomiles")
+        else if(conversionType == ConversionTypes.KilometersToMiles)
         {
             ViewData["ConversionType"] = "Kilometers to Miles";
             //next 2 lines below takes inputConversion and turns it from kilometers to miles
@@ -84,15 +89,15 @@ public class ConversionsModel : PageModel
             if (newInput < 0)
             {
                 newInput *= -1;
-                double positiveInput = Convert.ToDouble(Input);
+                double positiveInput = Convert.ToDouble(Conversion.Input);
                 positiveInput *= -1;
-                Input = positiveInput.ToString();
+                Conversion.Input = positiveInput.ToString();
             }
 
             InputType = "kilometers";
             OutputType = "miles";
         }
-        else if (conversionType.ToLower() == "fahrenheittocelsius")
+        else if (conversionType == ConversionTypes.FahrenheitToCelsius)
         {
             ViewData["ConversionType"] = "Fahrenheit To Celsius";
             //next 2 lines below takes inputConversion and turns it from Fahrenheit to Celsius
@@ -102,7 +107,7 @@ public class ConversionsModel : PageModel
             InputType = "Fahrenheit";
             OutputType = "Celsius";
         }
-        else if (conversionType.ToLower() == "celsiustofahrenheit")
+        else if (conversionType == ConversionTypes.CelsuiusToFahrenheit)
         {
             ViewData["ConversionType"] = "Celsius to Fahrenheit";
             //next 2 lines below takes inputConversion and turns it from Celsius to Fahrenheit
@@ -112,7 +117,7 @@ public class ConversionsModel : PageModel
             InputType = "Celsius";
             OutputType = "Fahrenheit";
         }
-        else if (conversionType.ToLower() == "poundstokilograms")
+        else if (conversionType == ConversionTypes.PoundsToKilograms)
         {
             ViewData["ConversionType"] = "Pounds to Kilograms";
             //next 2 lines below takes inputConversion and turns it from pounds to kilograms
@@ -125,15 +130,15 @@ public class ConversionsModel : PageModel
             if (newInput < 0)
             {
                 newInput *= -1;
-                double positiveInput = Convert.ToDouble(Input);
+                double positiveInput = Convert.ToDouble(Conversion.Input);
                 positiveInput *= -1;
-                Input = positiveInput.ToString();
+                Conversion.Input = positiveInput.ToString();
             }
 
             InputType = "pounds";
             OutputType = "kilograms";
         }
-        else if (conversionType.ToLower() == "kilogramstopounds")
+        else if (conversionType == ConversionTypes.KilogramsToPounds)
         {
             ViewData["ConversionType"] = "Kilograms to Pounds";
             //next 2 lines below takes inputConversion and turns it from kilograms to pounds
@@ -146,15 +151,15 @@ public class ConversionsModel : PageModel
             if (newInput < 0)
             {
                 newInput *= -1;
-                double positiveInput = Convert.ToDouble(Input);
+                double positiveInput = Convert.ToDouble(Conversion.Input);
                 positiveInput *= -1;
-                Input = positiveInput.ToString();
+                Conversion.Input = positiveInput.ToString();
             }
 
             InputType = "kilograms";
             OutputType = "pounds";
         }
-        else if (conversionType.ToLower() == "bitstobytes")
+        else if (conversionType == ConversionTypes.BitsToBytes)
         {
             ViewData["ConversionType"] = "Bits to Bytes";
             //next 2 lines below takes inputConversion and turns it from bytes to gigabytes
@@ -167,15 +172,15 @@ public class ConversionsModel : PageModel
             if (newInput < 0)
             {
                 newInput *= -1;
-                double positiveInput = Convert.ToDouble(Input);
+                double positiveInput = Convert.ToDouble(Conversion.Input);
                 positiveInput *= -1;
-                Input = positiveInput.ToString();
+                Conversion.Input = positiveInput.ToString();
             }
 
             InputType = "bits";
             OutputType = "bytes";
         }
-        else if (conversionType.ToLower() == "bytestobits")
+        else if (conversionType == ConversionTypes.BytesToBits)
         {
             ViewData["ConversionType"] = "Bytes to Bits";
             //next 2 lines below takes inputConversion and turns it from gigabytes to bytes
@@ -188,15 +193,15 @@ public class ConversionsModel : PageModel
             if (newInput < 0)
             {
                 newInput *= -1;
-                double positiveInput = Convert.ToDouble(Input);
+                double positiveInput = Convert.ToDouble(Conversion.Input);
                 positiveInput *= -1;
-                Input = positiveInput.ToString();
+                Conversion.Input = positiveInput.ToString();
             }
 
             InputType = "bytes";
             OutputType = "bits";
         }
-        else if (conversionType.ToLower() == "minutestohours")
+        else if (conversionType == ConversionTypes.MinutesToHours)
         {
             ViewData["ConversionType"] = "Minutes to Hours";
             //next 2 lines below takes inputConversion and turns it from minutes to hours
@@ -209,15 +214,15 @@ public class ConversionsModel : PageModel
             if (newInput < 0)
             {
                 newInput *= -1;
-                double positiveInput = Convert.ToDouble(Input);
+                double positiveInput = Convert.ToDouble(Conversion.Input);
                 positiveInput *= -1;
-                Input = positiveInput.ToString();
+                Conversion.Input = positiveInput.ToString();
             }
 
             InputType = "minutes";
             OutputType = "hours";
         }
-        else if (conversionType.ToLower() == "hourstominutes")
+        else if (conversionType == ConversionTypes.HoursToMinutes)
         {
             ViewData["ConversionType"] = "Hours to Minutes";
             //next 2 lines below takes inputConversion and turns it from hours to minutes
@@ -230,9 +235,9 @@ public class ConversionsModel : PageModel
             if (newInput < 0)
             {
                 newInput *= -1;
-                double positiveInput = Convert.ToDouble(Input);
+                double positiveInput = Convert.ToDouble(Conversion.Input);
                 positiveInput *= -1;
-                Input = positiveInput.ToString();
+                Conversion.Input = positiveInput.ToString();
             }
 
             InputType = "hours";
@@ -244,18 +249,17 @@ public class ConversionsModel : PageModel
              View Data for Conversion Type is set to blank. */
             ViewData["ErrorMessage"] = "Unknown or unsupported conversion type. Try again.";
             ViewData["ConversionType"] = "";
-            Input = "0";
-            Output = "0";
+            Conversion.Input = "0";
+            Conversion.Output = "0";
 
             InputType = "";
             OutputType = "";
-            conversionError = true;
         }
 
         //line below takes newInput and rounds it.
         newInput = Math.Round(newInput, 4);
         //line below takes newInput and gives it to Output as a string
-        Output = newInput.ToString();
+        Conversion.Output = newInput.ToString();
 
     }
 
