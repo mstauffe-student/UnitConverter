@@ -8,7 +8,7 @@ namespace UnitConverter;
 public class ConversionsModel : PageModel
 {
     [BindProperty(SupportsGet = true)]
-    public string ConversionType { get; set; } = string.Empty;
+    public string ConversionType { get; set; } = "MilesToKilometers";
 
     [BindProperty(SupportsGet = true)]
     public string Input { get; set; } = "3.1415";
@@ -23,9 +23,8 @@ public class ConversionsModel : PageModel
     {
         ViewData["Title"] = "Conversions";
 
-        Boolean inputError = false;
         Boolean conversionError = false;
-        ViewData["ErrorMessage"] = "";
+        // ViewData["ErrorMessage"] = null;
 
         string input = Input;
         string conversionType = ConversionType;
@@ -39,9 +38,10 @@ public class ConversionsModel : PageModel
         }
         catch (Exception e)
         {
-            inputError = true;
             Input = "0";
             Console.WriteLine("Invalid input: must be a number. " + e.Message);
+            ViewData["ErrorMessage"] = "Invalid input value. Try again.";
+            return;
         }
 
 
@@ -256,22 +256,6 @@ public class ConversionsModel : PageModel
         newInput = Math.Round(newInput, 4);
         //line below takes newInput and gives it to Output as a string
         Output = newInput.ToString();
-
-        /* This uses the booleans of inputError and conversionError to determine what the
-         ErrorMessage will say. Conversion only issue is solved in the if/else for the
-         conversion types. View Data for Conversion Type is set to blank.*/
-        if (inputError && conversionError)
-        {
-            //If both an input AND a conversion error occurs. This uses ErrorMessage and explains why.
-            ViewData["ErrorMessage"] = "Multiple errors! Invalid input and conversion type. Try Again.";
-            ViewData["ConversionType"] = "";
-        }
-        else if (inputError)
-        {
-            //If the try/catch for the input has an issue. This uses ErrorMessage and explains why.
-            ViewData["ErrorMessage"] = "Invalid input! Must be a valid number. Try Again.";
-            ViewData["ConversionType"] = "";
-        }
 
     }
 

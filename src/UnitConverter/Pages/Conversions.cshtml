@@ -19,15 +19,11 @@
 <h1>@ViewData["ConversionType"]</h1>
 
 <!--Adds an error message to replace the header if something goes wrong-->
-    @if (!string.IsNullOrEmpty(ViewData["ErrorMessage"].ToString()))
-    {
         <p class="text-danger">@ViewData["ErrorMessage"]</p>
-    }
-    else if(ViewData["ConversionType"] != null)
-    {
+
         <h5><br/>Input: @Model.Input @Model.InputType</h5>
         <h5>Output: @Model.Output @Model.OutputType (rounded)</h5>
-    }
+
 
     <!--Adds the input value form the cs class and the output value
     from cs class to be displayed on webpage. -->
