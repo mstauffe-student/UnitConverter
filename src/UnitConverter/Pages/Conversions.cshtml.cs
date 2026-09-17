@@ -11,7 +11,7 @@ public class ConversionsModel : PageModel
     public string ConversionType { get; set; } = string.Empty;
 
     [BindProperty(SupportsGet = true)]
-    public string Input { get; set; } = string.Empty;
+    public string Input { get; set; } = "3.1415";
     public string Output { get; set; } = string.Empty;
 
     public string InputType = string.Empty;
