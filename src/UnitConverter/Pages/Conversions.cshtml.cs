@@ -1,10 +1,14 @@
 ﻿using System.Security.Cryptography.X509Certificates;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.VisualBasic;
 using UnitConverter.Pages;
+using UnitConverter.Models;
 
 
 namespace UnitConverter;
+
+
 
 public class ConversionsModel : PageModel
 {
@@ -21,8 +25,7 @@ public class ConversionsModel : PageModel
     public string OutputType = string.Empty;
 
     [BindProperty(SupportsGet = true)]
-    public ConversionModel Conversion { get; set; } =  new();
-
+    public ConversionModel Conversion { get; set; }
 
     public void OnGet()
     {
@@ -33,6 +36,12 @@ public class ConversionsModel : PageModel
 
         string input = Conversion.Input;
         string conversionType = Conversion.ConversionType;
+
+        if (input == null || input == string.Empty)
+        {
+            input = "0";
+            Conversion.Input = input;
+        }
 
         double inputConversion = 0;
 
@@ -107,7 +116,7 @@ public class ConversionsModel : PageModel
             InputType = "Fahrenheit";
             OutputType = "Celsius";
         }
-        else if (conversionType == ConversionTypes.CelsuiusToFahrenheit)
+        else if (conversionType == ConversionTypes.CelsiusToFahrenheit)
         {
             ViewData["ConversionType"] = "Celsius to Fahrenheit";
             //next 2 lines below takes inputConversion and turns it from Celsius to Fahrenheit
@@ -261,6 +270,6 @@ public class ConversionsModel : PageModel
         //line below takes newInput and gives it to Output as a string
         Conversion.Output = newInput.ToString();
 
-    }
 
+    }
 }

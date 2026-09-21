@@ -5,7 +5,7 @@ public static class ConversionTypes
     public const string MilesToKilometers = "MilesToKilometers";
     public const string KilometersToMiles = "KilometersToMiles";
     public const string FahrenheitToCelsius = "FahrenheitToCelsius";
-    public const string CelsuiusToFahrenheit = "CelsuiusToFahrenheit";
+    public const string CelsiusToFahrenheit = "CelsiusToFahrenheit";
     public const string PoundsToKilograms = "PoundsToKilograms";
     public const string KilogramsToPounds = "KilogramsToPounds";
     public const string BitsToBytes = "BitsToBytes";
@@ -19,7 +19,7 @@ public static class ConversionTypes
             [MilesToKilometers] = "Miles to Kilometers",
             [KilometersToMiles] = "Kilometers to Miles",
             [FahrenheitToCelsius] = "Fahrenheit to Celsius",
-            [CelsuiusToFahrenheit] = "Celsius to Fahrenheit",
+            [CelsiusToFahrenheit] = "Celsius to Fahrenheit",
             [PoundsToKilograms] = "Pounds to Kilograms",
             [KilogramsToPounds] = "Kilograms to Pounds",
             [BitsToBytes] = "Bits to Bytes",
