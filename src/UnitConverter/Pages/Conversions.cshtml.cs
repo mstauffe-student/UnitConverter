@@ -8,8 +8,6 @@ using UnitConverter.Models;
 
 namespace UnitConverter;
 
-
-
 public class ConversionsModel : PageModel
 {
    // [BindProperty(SupportsGet = true)]
@@ -24,8 +22,7 @@ public class ConversionsModel : PageModel
 
     public string OutputType = string.Empty;
 
-    [BindProperty(SupportsGet = true)]
-    public ConversionModel Conversion { get; set; }
+    [BindProperty(SupportsGet = true)] public ConversionModel Conversion { get; set; } = new ConversionModel();
 
     public void OnGet()
     {

@@ -12,8 +12,5 @@
       <Compile Update="Pages\ConversionModel.cs">
         <DependentUpon>Conversions.cshtml</DependentUpon>
       </Compile>
-      <Compile Update="Pages\ConversionTypes.cs">
-        <DependentUpon>Conversions.cshtml</DependentUpon>
-      </Compile>
     </ItemGroup>
 </Project>
