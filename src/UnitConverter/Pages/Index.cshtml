@@ -12,6 +12,9 @@
 <div class="conversionForm">
     <form method="get" asp-page="/Conversions">
 
+        <!--Adds a form for conversionType. Users can select a type and submit with a button.
+        -->
+
         <label for="conversionType">Conversion Type</label>
         <select id="conversionType"
                 type="text"
@@ -23,6 +26,11 @@
             }
         </select>
 
+        <br/>
+
+        <!--Adds a form for a conversion input. Users can enter a number and submit with a button.
+        It will take then take them to the Conversion page.-->
+
         <label for="input">Conversion Input</label>
         <input id="input"
                class="form-control"
@@ -33,7 +41,8 @@
         <button class="btn btn-primary">Submit</button>
     </form>
 
-    <a asp-page="/QuickConversions">Quick Conversions</a>
+    <br/><hr/>
+    <a asp-page="/QuickConversions">Go to Quick Conversions</a>
 
 
 

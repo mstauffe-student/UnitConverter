@@ -1,4 +1,4 @@
-﻿@page
+﻿@page "{handler?}"
 @model UnitConverter.Pages.QuickConversions
 
 @{
@@ -13,20 +13,110 @@
 <body>
 <div>
 
+    <!--Adds a form for MilesToKilometers. Users can enter a value and submit with a button.
+    It will take then take them to the Conversion page. -->
     <form method="get" asp-page-handler="@ConversionTypes.MilesToKilometers">
-        <label for="miles" class="form-label">Miles</label>
+        <label for="miles" class="form-label">Miles to kilometers (enter a number)</label>
         <input id="miles" name="input" type="text" class="form-control"/>
         <button type="submit" class="btn btn-primary">Convert</button>
     </form>
 
+    <br/>
+
+    <!--Adds a form for KilometersToMiles. Users can enter a number and submit with a button.
+    It will take then take them to the Conversion page.-->
     <form method="get" asp-page-handler="@ConversionTypes.KilometersToMiles">
-        <label for="kilometers" class="form-label">Kilometers</label>
-        <input id="kilometers" name="input" type="text" class="form-control"/>
+        <label for="kilometers" class="form-label">Kilometers to miles (enter a number) </label>
+        <input id="kilometers" name="input" type="number" class="form-control"/>
         <button type="submit" class="btn btn-primary">Convert</button>
     </form>
 
+    <hr/><br/>
 
-    <a asp-page="/Index">Back to Index</a>
+    <!--Adds a text-area form for FahrenheitToCelsius. Users can enter a value and submit with a button.
+    It will take then take them to the Conversion page.-->
+    <form method="get" asp-page-handler="@ConversionTypes.FahrenheitToCelsius">
+        <label for="fahrenheit" class="form-label">Fahrenheit to celsius (enter a number) </label>
+        <textarea id="fahrenheit" name="input" rows="1" cols="10" placeholder="Type your number here"></textarea>
+        <button type="submit" class="btn btn-primary">Convert</button>
+    </form>
+
+    <br/>
+
+    <!--Adds a range form for CelsiusToFahrenheit. Users can select a value and submit with a button.
+    It will take then take them to the Conversion page.-->
+    <form method="get" asp-page-handler="@ConversionTypes.CelsiusToFahrenheit">
+        <label for="celsius" class="form-label">Celsius to Fahrenheit </label>
+        <input id="celsius" name="input" type="range" min="-273" max="100" value="0" oninput="this.nextElementSibling.value = this.value"/>
+        <output>0</output>
+        <button type="submit" class="btn btn-primary">Convert</button>
+    </form>
+
+    <hr/><br/>
+
+    <!--Adds a select-list form for PoundsToKilograms. Users can select a value and submit with a button.
+    It will take then take them to the Conversion page.-->
+    <form method="get" asp-page-handler="@ConversionTypes.PoundsToKilograms">
+        <label for="pounds" class="form-label">Pounds to kilograms (pick a number)</label>
+        <select id="pounds" name="input" class="form-select" asp-items="Model.PoundOptions"></select>
+        <button type="submit" class="btn btn-primary">Convert</button>
+    </form>
+
+    <br/>
+
+    <!--Adds a text-area form for KilogramsToPounds. Users can enter a value and submit with a button.
+    It will take then take them to the Conversion page.-->
+    <form method="get" asp-page-handler="@ConversionTypes.KilogramsToPounds">
+        <label for="kilograms" class="form-label">Kilograms to pounds (enter a number) </label>
+        <textarea id="kilograms" name="input" rows="1" cols="10" placeholder="Type your number here"></textarea>
+        <button type="submit" class="btn btn-primary">Convert</button>
+    </form>
+
+    <hr/><br/>
+
+    <!--Adds a form for BitsToBytes. Users can enter a number and submit with a button.
+    It will take then take them to the Conversion page.-->
+    <form method="get" asp-page-handler="@ConversionTypes.BitsToBytes">
+        <label for="bits" class="form-label">Bits to bytes (enter a number) </label>
+        <input id="bits" name="input" type="number" class="form-control"/>
+        <button type="submit" class="btn btn-primary">Convert</button>
+    </form>
+
+    <br/>
+
+    <!--Adds a form for BytesToBits. Users can enter a number and submit with a button.
+    It will take then take them to the Conversion page.-->
+    <form method="get" asp-page-handler="@ConversionTypes.BytesToBits">
+        <label for="bytes" class="form-label">Bytes to bits (enter a number) </label>
+        <input id="bytes" name="input" type="number" class="form-control"/>
+        <button type="submit" class="btn btn-primary">Convert</button>
+    </form>
+
+    <hr/><br/>
+
+    <!--Adds a range form for MinutesToHours. Users can select a value and submit with a button.
+    It will take then take them to the Conversion page.-->
+    <form method="get" asp-page-handler="@ConversionTypes.MinutesToHours">
+        <label for="minutes" class="form-label">Minutes to hours </label>
+        <input id="minutes" name="input" type="range" min="0" max="60" value="0" oninput="this.nextElementSibling.value = this.value"/>
+        <output>0</output>
+        <button type="submit" class="btn btn-primary">Convert</button>
+    </form>
+
+    <br/>
+
+    <!--Adds a range form for HoursToMinutes. Users can select a value and submit with a button.
+    It will take then take them to the Conversion page.-->
+    <form method="get" asp-page-handler="@ConversionTypes.HoursToMinutes">
+        <label for="hours" class="form-label">Minutes to hours </label>
+        <input id="hours" name="input" type="range" min="0" max="24" value="0" step="0.25" oninput="this.nextElementSibling.value = this.value"/>
+        <output>0</output>
+        <button type="submit" class="btn btn-primary">Convert</button>
+    </form>
+
+    <br/><hr/>
+
+    <a asp-page="/Index">Back to Home</a>
 </div>
 </body>
 </html>
