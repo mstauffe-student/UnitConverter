@@ -1,4 +1,8 @@
+using UnitConverter;
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddSingleton<IConversionService, UnitConverter.UnitOfConversionService>();
 
 // Add services to the container.
 builder.Services.AddRazorPages();
@@ -26,9 +30,12 @@ app.MapRazorPages()
 app.Run();
 
 
+
+
 /// <summary>
 /// This is provided to support the WebApplicationFactory used in testing.
 /// </summary>
 public partial class Program
 {
+
 }

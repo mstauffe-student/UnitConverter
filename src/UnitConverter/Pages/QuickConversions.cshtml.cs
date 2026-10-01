@@ -3,11 +3,24 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.VisualBasic;
 using Microsoft.VisualBasic.CompilerServices;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using UnitConverter.Models;
+
 
 namespace UnitConverter.Pages;
 
+
+
 public class QuickConversions : PageModel
 {
+
+
+    private readonly IConversionService _conversionService;
+    public QuickConversions(IConversionService conversionService)
+    {
+        _conversionService = conversionService;
+    }
+
+    public decimal Output { get; set; } = 0;
 
 
     /*
@@ -18,13 +31,20 @@ public class QuickConversions : PageModel
 
    }
 
+   public IActionResult PerformAction(string input, string conversion)
+   {
+       decimal newInput = Convert.ToDecimal(input);
+       Output = _conversionService.Convert(newInput, conversion);
+       return Page();
+   }
    /*
     * Takes input from MilesToKilometers handler and takes it to Conversions.
     * @return redirects back to Conversion page with MilesToKilometers and selected input.
     */
     public IActionResult OnGetMilesToKilometers(string input)
     {
-        return RedirectToPage("/Conversions", new { conversionType = ConversionTypes.MilesToKilometers, input = input });
+        return PerformAction(input, ConversionTypes.MilesToKilometers);
+        //return RedirectToPage("/Conversions", new { conversionType = ConversionTypes.MilesToKilometers, input = input });
     }
 
     /*
