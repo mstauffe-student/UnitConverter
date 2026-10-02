@@ -21,6 +21,7 @@ public class QuickConversions : PageModel
     }
 
     public decimal Output { get; set; } = 0;
+    public string OutputType = string.Empty;
 
 
     /*
@@ -31,47 +32,65 @@ public class QuickConversions : PageModel
 
    }
 
+   /**
+    * Takes a string input and tries turing it into a decimal. It then
+    * will take the decimal and insert it into the Convert method from the
+    * UnitOfConversionService. Also, takes a string for the conversion type and
+    * inserts it into the Convert method and OutputType method. Allows for an output
+    * and a ype of output to be shown on the html page. Returns the page.
+    */
    public IActionResult PerformAction(string input, string conversion)
    {
-       decimal newInput = Convert.ToDecimal(input);
+       decimal newInput = 0;
+       try
+       {
+           newInput = Convert.ToDecimal(input);
+       }
+       catch (Exception e)
+       {
+           Console.WriteLine("Invalid input: must be a number. " + e.Message);
+           ViewData["ErrorMessage"] = "Error! Invalid input value. Try again.";
+           return Page();
+       }
+
        Output = _conversionService.Convert(newInput, conversion);
+       OutputType = _conversionService.OutputType(conversion);
        return Page();
    }
    /*
     * Takes input from MilesToKilometers handler and takes it to Conversions.
-    * @return redirects back to Conversion page with MilesToKilometers and selected input.
+    * @return uses PerformConversion() with MilesToKilometers and selected input.
     */
     public IActionResult OnGetMilesToKilometers(string input)
     {
         return PerformAction(input, ConversionTypes.MilesToKilometers);
-        //return RedirectToPage("/Conversions", new { conversionType = ConversionTypes.MilesToKilometers, input = input });
     }
 
     /*
      * Takes input from KilometersToMiles handler and takes it to Conversions.
-     * @return redirects back to Conversion page with KilometersToMiles and selected input.
+     * @return uses PerformConversion() with KilometersToMiles and selected input.
      */
     public IActionResult OnGetKilometersToMiles(string input)
     {
-        return RedirectToPage("/Conversions", new { conversionType = ConversionTypes.KilometersToMiles, input = input });
+        return PerformAction(input, ConversionTypes.KilometersToMiles);
     }
 
     /*
      * Takes input from FahrenheitToCelsius handler and takes it to Conversions.
-     * @return redirects back to Conversion page with FahrenheitToCelsius and selected input.
+     * @return uses PerformConversion() with FahrenheitToCelsius and selected input.
      */
     public IActionResult OnGetFahrenheitToCelsius(string input)
     {
-        return RedirectToPage("/Conversions", new { conversionType = ConversionTypes.FahrenheitToCelsius, input = input });
+        return PerformAction(input, ConversionTypes.FahrenheitToCelsius);
     }
 
     /*
      * Takes input from CelsiusToFahrenheit handler and takes it to Conversions.
-     * @return redirects back to Conversion page with CelsiusToFahrenheit and selected input from the range.
+     * @return uses PerformConversion() with CelsiusToFahrenheit and selected input from the range.
      */
     public IActionResult OnGetCelsiusToFahrenheit(string input)
     {
-        return RedirectToPage("/Conversions", new { conversionType = ConversionTypes.CelsiusToFahrenheit, input = input });
+        return PerformAction(input, ConversionTypes.CelsiusToFahrenheit);
     }
 
     /*
@@ -89,56 +108,56 @@ public class QuickConversions : PageModel
 
     /*
      * Takes input from PoundsToKilograms handler and takes it to Conversions.
-     * @return redirects back to Conversion page with PoundsToKilograms and selected input from the list.
+     * @return uses PerformConversion() with PoundsToKilograms and selected input from the list.
      */
     public IActionResult OnGetPoundsToKilograms(string input)
     {
-        return RedirectToPage("/Conversions", new { conversionType = ConversionTypes.PoundsToKilograms, input = input });
+        return PerformAction(input, ConversionTypes.PoundsToKilograms);
     }
 
     /*
      * Takes input from KilogramsToPounds handler and takes it to Conversions.
-     * @return redirects back to Conversion page with KilogramsToPounds and selected input.
+     * @return uses PerformConversion() with KilogramsToPounds and selected input.
      */
     public IActionResult OnGetKilogramsToPounds(string input)
     {
-        return RedirectToPage("/Conversions", new { conversionType = ConversionTypes.KilogramsToPounds, input = input });
+        return PerformAction(input, ConversionTypes.KilogramsToPounds);
     }
 
     /*
      * Takes input from BitsToBytes handler and takes it to Conversions.
-     * @return redirects back to Conversion page with BitsToBytes and selected input.
+     * @return uses PerformConversion() with BitsToBytes and selected input.
      */
     public IActionResult OnGetBitsToBytes(string input)
     {
-        return RedirectToPage("/Conversions", new { conversionType = ConversionTypes.BitsToBytes, input = input });
+        return PerformAction(input, ConversionTypes.BitsToBytes);
     }
 
     /*
      * Takes input from BytesToBits handler and takes it to Conversions.
-     * @return redirects back to Conversion page with BytesToBits and selected input.
+     * @return uses PerformConversion() with BytesToBits and selected input.
      */
     public IActionResult OnGetBytesToBits(string input)
     {
-        return RedirectToPage("/Conversions", new { conversionType = ConversionTypes.BytesToBits, input = input });
+        return PerformAction(input, ConversionTypes.BytesToBits);
     }
 
     /*
      * Takes input from MinutesToHours handler and takes it to Conversions.
-     * @return redirects back to Conversion page with MinutesToHours and selected input from the range.
+     * @return uses PerformConversion() with MinutesToHours and selected input from the range.
      */
     public IActionResult OnGetMinutesToHours(string input)
     {
-        return RedirectToPage("/Conversions", new { conversionType = ConversionTypes.MinutesToHours, input = input });
+        return PerformAction(input, ConversionTypes.MinutesToHours);
     }
 
     /*
      * Takes input from HoursToMinutes handler and takes it to Conversions.
-     * @return redirects back to Conversion page with HoursToMinutes and selected input from the range.
+     * @return uses PerformConversion() with HoursToMinutes and selected input from the range.
      */
     public IActionResult OnGetHoursToMinutes(string input)
     {
-        return RedirectToPage("/Conversions", new { conversionType = ConversionTypes.HoursToMinutes, input = input });
+        return PerformAction(input, ConversionTypes.HoursToMinutes);
     }
 
 }

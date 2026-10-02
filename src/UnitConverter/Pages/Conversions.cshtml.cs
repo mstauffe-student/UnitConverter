@@ -10,14 +10,6 @@ namespace UnitConverter;
 
 public class ConversionsModel : PageModel
 {
-   // [BindProperty(SupportsGet = true)]
-   // public string ConversionType { get; set; } = "MilesToKilometers";
-
-    //[BindProperty(SupportsGet = true)]
-
-   // public string Input { get; set; } = "3.1415";
-   // public string Output { get; set; } = string.Empty;
-
     public string InputType = string.Empty;
 
     public string OutputType = string.Empty;

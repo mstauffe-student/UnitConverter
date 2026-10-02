@@ -12,6 +12,11 @@
 </head>
 <body>
 <div>
+    <p class="text-danger">@ViewData["ErrorMessage"]</p>
+
+    <h4>Conversion output: @Model.Output @Model.OutputType</h4>
+    <hr/><br/>
+
 
     <!--Adds a form for MilesToKilometers. Users can enter a value and submit with a button.
     It will take then take them to the Conversion page. -->
@@ -108,15 +113,13 @@
     <!--Adds a range form for HoursToMinutes. Users can select a value and submit with a button.
     It will take then take them to the Conversion page.-->
     <form method="get" asp-page-handler="@ConversionTypes.HoursToMinutes">
-        <label for="hours" class="form-label">Minutes to hours (pick a number)</label>
+        <label for="hours" class="form-label">Hours to minutes (pick a number)</label>
         <input id="hours" name="input" type="range" min="0" max="24" value="0" step="0.25" oninput="this.nextElementSibling.value = this.value"/>
         <output>0</output>
         <button type="submit" class="btn btn-primary">Convert</button>
     </form>
 
     <br/><hr/>
-
-    <h5>@Model.Output;</h5>
 
     <a asp-page="/Index">Back to Home</a>
 </div>

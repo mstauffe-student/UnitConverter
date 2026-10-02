@@ -1,8 +1,9 @@
 using UnitConverter;
+using UnitConverter.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddSingleton<IConversionService, UnitConverter.UnitOfConversionService>();
+builder.Services.AddSingleton<IConversionService, UnitOfConversionService>();
 
 // Add services to the container.
 builder.Services.AddRazorPages();

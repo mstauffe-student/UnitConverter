@@ -27,4 +27,13 @@ public class UnitsNetConversionService : IConversionService
         // Preserve the two-decimal behavior established by the existing application.
         return decimal.Truncate((decimal)convertedValue * 100m) / 100m;
     }
+
+    /*
+     * Ignore this. This is a method I added to make the output looks a little nicer. I had to add
+     * it here since I included this method in the Interface.
+     */
+    public string OutputType(string conversionType)
+    {
+        return "";
+    }
 }

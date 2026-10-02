@@ -6,6 +6,11 @@ namespace UnitConverter;
 
 public class UnitOfConversionService : IConversionService
 {
+    /**
+     * Takes a decimal and a string. The decimal gets converted based on the
+     * type of conversion wanted. The string represents the type of conversion
+     * wanted. Returns the converted value.
+     */
     public decimal Convert(decimal value, string conversionType)
     {
 
@@ -94,11 +99,65 @@ public class UnitOfConversionService : IConversionService
             }
         }
 
-
+        //line below takes conversionValue and rounds it.
+        conversionValue = Math.Round(conversionValue, 4);
+        //line below takes conversionValue and gives it to value as a decimal
 
         value = System.Convert.ToDecimal(conversionValue);
 
         return value;
+    }
+
+    /*
+     * Takes a string that represents a type of conversion. It then
+     * determines the output "type" based on it. For example, for "miles
+     * to kilometers", a converted value would be in "kilometers."
+     */
+    public string OutputType(string conversionType)
+    {
+        string outputType = "";
+         if (conversionType == ConversionTypes.MilesToKilometers)
+        {
+            outputType = "kilometers";
+        }
+        if (conversionType == ConversionTypes.KilometersToMiles)
+        {
+            outputType = "miles";
+        }
+        if (conversionType == ConversionTypes.FahrenheitToCelsius)
+        {
+            outputType = "celsius";
+        }
+        if (conversionType == ConversionTypes.CelsiusToFahrenheit)
+        {
+            outputType = "fahrenheit";
+        }
+        if (conversionType == ConversionTypes.PoundsToKilograms)
+        {
+           outputType = "kilograms";
+        }
+        if (conversionType == ConversionTypes.KilogramsToPounds)
+        {
+           outputType = "pounds";
+        }
+        if (conversionType == ConversionTypes.BitsToBytes)
+        {
+           outputType = "bytes";
+        }
+        if (conversionType == ConversionTypes.BytesToBits)
+        {
+            outputType  = "bits";
+        }
+        if (conversionType == ConversionTypes.MinutesToHours)
+        {
+            outputType = "hours";
+        }
+        if (conversionType == ConversionTypes.HoursToMinutes)
+        {
+            outputType = "minutes";
+        }
+
+        return outputType;
     }
 
 }
