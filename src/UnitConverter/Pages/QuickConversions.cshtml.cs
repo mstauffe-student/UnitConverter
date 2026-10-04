@@ -13,15 +13,15 @@ namespace UnitConverter.Pages;
 public class QuickConversions : PageModel
 {
 
-
+    //code lines 17-21 allow IConversionService to be injected into this class
     private readonly IConversionService _conversionService;
     public QuickConversions(IConversionService conversionService)
     {
         _conversionService = conversionService;
     }
 
-    public decimal Output { get; set; } = 0;
-    public string OutputType = string.Empty;
+    public decimal Output { get; set; } = 0; //Output number of a conversion
+    public string OutputType = string.Empty; //Output conversion type
 
 
     /*

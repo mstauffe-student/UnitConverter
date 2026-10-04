@@ -7,7 +7,7 @@ namespace UnitConverter;
 public class UnitOfConversionService : IConversionService
 {
     /**
-     * Takes a decimal and a string. The decimal gets converted based on the
+     * Takes a decimal and a string and puts in a big if/else. The decimal gets converted based on the
      * type of conversion wanted. The string represents the type of conversion
      * wanted. Returns the converted value.
      */
@@ -159,5 +159,4 @@ public class UnitOfConversionService : IConversionService
 
         return outputType;
     }
-
 }
