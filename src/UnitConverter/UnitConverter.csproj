@@ -6,12 +6,19 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
     <ItemGroup>
+        <PackageReference Include="Serilog.AspNetCore" Version="10.0.1-dev-02312" />
         <PackageReference Include="UnitOf" Version="1.0.0" />
         <PackageReference Include="UnitsNet" Version="5.75.1" />
     </ItemGroup>
     <ItemGroup>
+<<<<<<< HEAD
       <Compile Update="Pages\ConversionModel.cs">
         <DependentUpon>Conversions.cshtml</DependentUpon>
       </Compile>
+=======
+        <None Update="Logs/.gitkeep"
+              CopyToOutputDirectory="PreserveNewest"
+              CopyToPublishDirectory="PreserveNewest" />
+>>>>>>> 1233aaa (Updated with Serilog components)
     </ItemGroup>
 </Project>
