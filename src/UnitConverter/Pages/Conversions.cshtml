@@ -1,7 +1,7 @@
-﻿@page "/Conversions/{conversionType=MilesToKilometers}/{input=3.1415}"
+﻿@page "/Conversions/{ConversionType?}/{Input?}"
 @using Microsoft.AspNetCore.Mvc.RazorPages
 @using Microsoft.VisualBasic
-@model UnitConverter.ConversionsModel;
+@model UnitConverter.Conversions;
 
 @{
 }
@@ -13,17 +13,19 @@
 
 <!--Adds an error message to replace the header if something goes wrong-->
         <p class="text-danger">@ViewData["ErrorMessage"]</p>
-
-        <h5><br/>Input: @Model.Conversion.Input @Model.InputType</h5>
+        <br/>
+        <h5>Input: @Model.Conversion.Input @Model.InputType
+        </h5>
+        <br/>
         <h5>Output: @Model.Conversion.Output @Model.OutputType (rounded)</h5>
 
         <!--Adds the input value form the cs class and the output value
         from cs class to be displayed on webpage. -->
+        <br/>
+        <hr/>
+        <a href="/Index">Return to Conversion form at Home.</a>
 
-
-        <br/><hr/><a href="/Index">Return to Conversion form at Home.</a>
-
-        <br/><br/><a asp-page="/QuickConversions">Return to Quick Conversions</a>
-
-
+        <br/>
+        <br/>
+        <a asp-page="/QuickConversions">Return to Quick Conversions</a>
 </div>

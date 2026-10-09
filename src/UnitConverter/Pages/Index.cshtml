@@ -6,7 +6,6 @@
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
 
 <div class="conversionForm">
@@ -14,9 +13,8 @@
 
         <!--Adds a form for conversionType. Users can select a type and submit with a button.
         -->
-
-        <label for="conversionType">Conversion Type</label>
-        <select id="conversionType"
+        <label for="Conversion.ConversionType">Conversion Type</label>
+        <select id="Conversion.ConversionType"
                 type="text"
                 class="form-select"
                 name="Conversion.ConversionType">
@@ -25,14 +23,12 @@
                 <option value="@conversion.Key">@conversion.Value</option>
             }
         </select>
-
         <br/>
 
         <!--Adds a form for a conversion input. Users can enter a number and submit with a button.
         It will take then take them to the Conversion page.-->
-
-        <label for="input">Conversion Input</label>
-        <input id="input"
+        <label for="Conversion.Input">Conversion Input</label>
+        <input id="Conversion.Input"
                class="form-control"
                name="Conversion.Input"
                type="text"
@@ -43,7 +39,4 @@
 
     <br/><hr/>
     <a asp-page="/QuickConversions">Go to Quick Conversions</a>
-
-
-
 </div>
