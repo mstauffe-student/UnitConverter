@@ -8,7 +8,6 @@ namespace UnitConverter.Models;
 
 public class ConversionModel
 {
-    //[Display(Name = "Conversion Type")]
     public string ConversionType {get; set;} = string.Empty;
 
     public string Input  {get; set;} = string.Empty;

@@ -36,8 +36,6 @@ public class Conversions : PageModel
     {
         ViewData["Title"] = "Conversions";
 
-        //Boolean conversionError = false;
-
         // This keeps the default behavior from Lesson 1
         if (string.IsNullOrEmpty(Conversion.ConversionType))
         {
@@ -64,7 +62,6 @@ public class Conversions : PageModel
             ViewData["ErrorMessage"] = "Input must be a number. Try again.";
             return;
         }
-
 
         //line below will represent the new, converted input
         double result = 0;

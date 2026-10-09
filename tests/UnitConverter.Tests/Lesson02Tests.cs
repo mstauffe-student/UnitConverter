@@ -113,7 +113,7 @@ public class Lesson02Tests
     {
         PageModel model = CreatePageModel();
 
-        SetProperty(model, "ConversionType", "MilestoKilometers");
+        SetProperty(model, "ConversionType", "MilesToKilometers"); //There was an error in "MilesToKilometers"
         SetProperty(model, "Input", "10");
 
         InvokeOnGet(model);

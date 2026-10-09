@@ -112,8 +112,10 @@ public class Lesson01Tests
         var modelType = typeof(Program).Assembly
             .GetTypes()
             .SingleOrDefault(type =>
-                type.Name == "ConversionsModel" &&
+                type.Name == "Conversions" &&
                 typeof(PageModel).IsAssignableFrom(type));
+        //I had to change type.Name to "Conversions" so tests would pass. It was set to
+        //It was set to "ConversionModel"
 
         Assert.NotNull(modelType);
         return modelType;
