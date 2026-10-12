@@ -1,12 +1,38 @@
 using UnitConverter;
 using UnitConverter.Services;
+using Serilog;
+using Serilog.Formatting.Compact;
 
 var builder = WebApplication.CreateBuilder(args);
 
+string logPath = Path.Combine(
+    builder.Environment.ContentRootPath,
+    "Logs", "unitconverter-.json");
+
+
+builder.Services.AddSerilog((services, configuration)
+    => configuration.MinimumLevel.Information().WriteTo.Console().WriteTo.File(
+        new RenderedCompactJsonFormatter(),
+        logPath,
+        rollingInterval: RollingInterval.Day,
+        retainedFileCountLimit: 31));
+
+
+try
+{
+    Log.Information("Starting up");
+}
+catch(Exception ex)
+{
+    Log.Error(ex, "An unhandled exception occurred");
+}
+
 builder.Services.AddSingleton<IConversionService, UnitOfConversionService>();
+builder.Services.AddSingleton<ILogReader, JsonLogReader>();
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+
 
 var app = builder.Build();
 

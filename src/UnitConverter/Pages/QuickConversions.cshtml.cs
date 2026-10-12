@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.VisualBasic;
 using Microsoft.VisualBasic.CompilerServices;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Extensions.Caching.Memory;
 using UnitConverter.Models;
 
 
@@ -15,10 +16,16 @@ public class QuickConversions : PageModel
 
     //code lines 17-21 allow IConversionService to be injected into this class
     private readonly IConversionService _conversionService;
-    public QuickConversions(IConversionService conversionService)
+    private readonly ILogger<QuickConversions> _logger;
+    public QuickConversions(IConversionService conversionService, ILogger<QuickConversions> logger)
     {
         _conversionService = conversionService;
+        _logger = logger;
     }
+
+    public string input;
+    public string conversionType;
+    public string result;
 
     public decimal Output { get; set; } = 0; //Output number of a conversion
     public string OutputType = string.Empty; //Output conversion type
@@ -41,10 +48,10 @@ public class QuickConversions : PageModel
     */
    public IActionResult PerformAction(string input, string conversion)
    {
-       decimal newInput = 0;
+       decimal result = 0;
        try
        {
-           newInput = Convert.ToDecimal(input);
+           result = Convert.ToDecimal(input);
        }
        catch (Exception e)
        {
@@ -53,10 +60,17 @@ public class QuickConversions : PageModel
            return Page();
        }
 
-       Output = _conversionService.Convert(newInput, conversion);
+       Output = _conversionService.Convert(result, conversion);
        OutputType = _conversionService.OutputType(conversion);
+
+       _logger.LogInformation("Converted {Input} using {ConversionType} with result {Result}",
+          input, conversionType, result);
+
        return Page();
    }
+
+
+
    /*
     * Takes input from MilesToKilometers handler and takes it to Conversions.
     * @return uses PerformConversion() with MilesToKilometers and selected input.
