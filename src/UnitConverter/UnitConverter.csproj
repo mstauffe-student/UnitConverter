@@ -15,4 +15,30 @@
               CopyToOutputDirectory="PreserveNewest"
               CopyToPublishDirectory="PreserveNewest" />
     </ItemGroup>
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Logs\NewDirectory1\unitconverter-202610121919.json" />
+      <_ContentIncludedByDefault Remove="Logs\NewDirectory1\unitconverter-202610121920.json" />
+      <_ContentIncludedByDefault Remove="Logs\NewDirectory1\unitconverter-202610121921.json" />
+      <_ContentIncludedByDefault Remove="Logs\NewDirectory1\unitconverter-202610121923.json" />
+      <_ContentIncludedByDefault Remove="Logs\NewDirectory1\unitconverter-202610121928.json" />
+      <_ContentIncludedByDefault Remove="Logs\NewDirectory1\unitconverter-20261012_002.json" />
+      <_ContentIncludedByDefault Remove="Logs\NewDirectory1\unitconverter-20261012_003.json" />
+      <_ContentIncludedByDefault Remove="Logs\NewDirectory1\unitconverter-20261012_004.json" />
+      <_ContentIncludedByDefault Remove="Logs\NewDirectory1\unitconverter-20261012_005.json" />
+      <_ContentIncludedByDefault Remove="Logs\NewDirectory1\unitconverter-20261012_006.json" />
+      <_ContentIncludedByDefault Remove="Logs\NewDirectory1\unitconverter-20261012_007.json" />
+      <_ContentIncludedByDefault Remove="Logs\NewDirectory1\unitconverter-20261012_008.json" />
+      <_ContentIncludedByDefault Remove="Logs\NewDirectory1\unitconverter-20261012_009.json" />
+      <_ContentIncludedByDefault Remove="Logs\NewDirectory1\unitconverter-20261012_010.json" />
+      <_ContentIncludedByDefault Remove="Logs\NewDirectory1\unitconverter-20261012_011.json" />
+      <_ContentIncludedByDefault Remove="Logs\NewDirectory1\unitconverter-20261012_012.json" />
+      <_ContentIncludedByDefault Remove="Logs\NewDirectory1\unitconverter-20261012_013.json" />
+      <_ContentIncludedByDefault Remove="Logs\NewDirectory1\unitconverter-20261012_014.json" />
+      <_ContentIncludedByDefault Remove="Logs\NewDirectory1\unitconverter-20261012_015.json" />
+      <_ContentIncludedByDefault Remove="Logs\NewDirectory1\unitconverter-20261012_016.json" />
+      <_ContentIncludedByDefault Remove="Logs\NewDirectory1\unitconverter-20261012_017.json" />
+      <_ContentIncludedByDefault Remove="Logs\NewDirectory1\unitconverter-20261012_018.json" />
+      <_ContentIncludedByDefault Remove="Logs\NewDirectory1\unitconverter-20261012_019.json" />
+      <_ContentIncludedByDefault Remove="Logs\NewDirectory1\unitconverter-20261012_020.json" />
+    </ItemGroup>
 </Project>

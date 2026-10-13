@@ -23,9 +23,9 @@ public class QuickConversions : PageModel
         _logger = logger;
     }
 
-    public string input;
-    public string conversionType;
-    public string result;
+   // public string input;
+   // public string conversionType;
+    //public string result;
 
     public decimal Output { get; set; } = 0; //Output number of a conversion
     public string OutputType = string.Empty; //Output conversion type
@@ -64,7 +64,7 @@ public class QuickConversions : PageModel
        OutputType = _conversionService.OutputType(conversion);
 
        _logger.LogInformation("Converted {Input} using {ConversionType} with result {Result}",
-          input, conversionType, result);
+          input, conversion, Output);
 
        return Page();
    }

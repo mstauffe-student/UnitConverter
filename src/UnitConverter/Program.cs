@@ -18,14 +18,6 @@ builder.Services.AddSerilog((services, configuration)
         retainedFileCountLimit: 31));
 
 
-try
-{
-    Log.Information("Starting up");
-}
-catch(Exception ex)
-{
-    Log.Error(ex, "An unhandled exception occurred");
-}
 
 builder.Services.AddSingleton<IConversionService, UnitOfConversionService>();
 builder.Services.AddSingleton<ILogReader, JsonLogReader>();

@@ -16,7 +16,7 @@ public class JsonLogReader : ILogReader
 
     public IEnumerable<LogEntry> Read()
     {
-        string[] logFiles = null;
+        string[] logFiles;
 
         List<LogEntry> logs = new List<LogEntry>();
 
@@ -26,7 +26,8 @@ public class JsonLogReader : ILogReader
         }
         catch (IOException e)
         {
-            _logger.LogError(e.Message + "Couldn't read log files from {LogDirectory}", _logDirectory);
+            _logger.LogError(e.Message + "Couldn't read log files from {logDirectory}", _logDirectory);
+            throw;
         }
 
         foreach (string logFile in logFiles)
@@ -54,7 +55,7 @@ public class JsonLogReader : ILogReader
             }
             catch (IOException e)
             {
-                _logger.LogError(e.Message + "Couldn't read log entry in file {LogFile}", logFile);
+                _logger.LogError(e.Message + "Couldn't read log entry in file {logFile}", logFile);
             }
         }
         return logs;
@@ -89,9 +90,13 @@ public class JsonLogReader : ILogReader
                     logs.Add(entry);
                 }
             }
-            catch (Exception e) when (e is JsonException or JsonException or NotSupportedException)
+            catch (Exception e) when (e is ArgumentNullException or NotSupportedException)
             {
-                _logger.LogWarning(e, "Couldn't {line} line entry in {LogFile}", line, logFile);
+                _logger.LogWarning(e, "Could not read {line} line entry in {LogFile}", line, logFile);
+            }
+            catch (Exception e) when (e is JsonException)
+            {
+                _logger.LogWarning("Testing");
             }
         }
     }
