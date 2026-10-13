@@ -6,7 +6,7 @@
 }
 
 <div>
-
+    <!--Lets up a select list for the different log levels -->
     <form>
         <label asp-for="Level" class="form-label">Level</label>
         <select asp-for="Level" class="form-select">
@@ -16,8 +16,9 @@
             <option value="Error">Error</option>
         </select>
 
-        <label for="ConversionType">Conversion Type</label>
-        <select id="ConversionType"
+        <!--Lets up a select list for the different conversion types -->
+        <label asp-for="ConversionType" class="form-label">Conversion Type</label>
+        <select asp-for="ConversionType"
                 type="text"
                 class="form-select"
                 name="ConversionType">
@@ -27,19 +28,18 @@
                 <option value="@conversion.Key">@conversion.Value</option>
             }
         </select>
-
+        <!--Sets up a button to submit after choosing an option(s) from the select lists -->
         <button class="btn btn-primary" type="submit">Search</button>
     </form>
+    <br/>
+    <!--Lets up a button to clear the log list to nothing-->
     <form method="post" asp-page-handler="ClearList">
         <button class="btn btn-primary" type="submit">Clear</button>
     </form>
-
-
-
 </div>
-<br/>
+<br/><hr/>
+<!--Lets up a table to show the logs and its time, level, message, conversion, input, and result. -->
 <div class="table-responsive">
-
     <table class="table table-striped">
         <thead class= "table-dark">
         <tr>
@@ -66,8 +66,6 @@
         </tbody>
     </table>
 
-    <h3>@ViewData["IfNone"]</h3>
-
-
+    <!--A message for if there is nothing the table shows -->
+    <h5>@ViewData["IfNone"]</h5>
 </div>
-

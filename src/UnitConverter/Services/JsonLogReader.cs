@@ -3,17 +3,33 @@ using UnitConverter.Models;
 
 namespace UnitConverter.Services;
 
+/**
+ * Class to read json logs.
+ */
 public class JsonLogReader : ILogReader
 {
     private readonly string _logDirectory;
     private readonly ILogger<JsonLogReader> _logger;
 
+    /**
+     * Constructor to set up injection for IWebHostEnvironment and ILogger.
+     *
+     * @param environment- dependency injection for IWebHostEnvironment.
+     * @param logger- dependency injection for ILogger.
+     */
     public JsonLogReader(IWebHostEnvironment environment, ILogger<JsonLogReader> logger)
     {
         _logDirectory = Path.Combine(environment.ContentRootPath, "Logs");
         _logger = logger;
     }
 
+    /**
+     * Reads the logs. Tries to get files that are .json. Throws and logs if an exception occurs.
+     * Uses GetFileStream() and LoadLogs() to help read and put the logs in a list to be used elsewhere, like
+     * in the Logs Razor Page.
+     *
+     * @return a list of LogEntry logs
+     */
     public IEnumerable<LogEntry> Read()
     {
         string[] logFiles;
@@ -61,6 +77,12 @@ public class JsonLogReader : ILogReader
         return logs;
     }
 
+    /**
+     * Tries using a stream to take a string of logFile. Throws an IOException and logs if an exception
+     * happens.
+     *
+     * @param logFiles a file for logging. Meant to be streamed in this case.
+     */
     private FileStream GetFileStream(string logFile)
     {
         FileStream stream;
@@ -78,6 +100,10 @@ public class JsonLogReader : ILogReader
         return stream;
     }
 
+    /**
+     * Tries to read each line from a log file to be added to a LogEntry list. Logs a warning if
+     * there is an ArgumentNullException, JsonException, or NotSupportedException.
+     */
     private void LoadLogs(StreamReader reader, string logFile, List<LogEntry> logs)
     {
         while (reader.ReadLine() is { } line)
@@ -90,16 +116,10 @@ public class JsonLogReader : ILogReader
                     logs.Add(entry);
                 }
             }
-            catch (Exception e) when (e is ArgumentNullException or NotSupportedException)
+            catch (Exception e) when (e is ArgumentNullException or JsonException or NotSupportedException)
             {
                 _logger.LogWarning(e, "Could not read {line} line entry in {LogFile}", line, logFile);
             }
-            catch (Exception e) when (e is JsonException)
-            {
-                _logger.LogWarning("Testing");
-            }
         }
     }
-
-
 }

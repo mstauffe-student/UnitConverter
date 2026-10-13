@@ -15,7 +15,8 @@ builder.Services.AddSerilog((services, configuration)
         new RenderedCompactJsonFormatter(),
         logPath,
         rollingInterval: RollingInterval.Day,
-        retainedFileCountLimit: 31));
+        retainedFileCountLimit: 31,
+        shared: true));
 
 
 

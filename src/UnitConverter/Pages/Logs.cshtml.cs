@@ -8,6 +8,10 @@ using UnitsNet;
 
 namespace UnitConverter.Pages;
 
+/**
+ * The Logs page model. It creates a list for the logs table. It gets the logs to show. It allows the select
+ * lists to actually filter the logs.
+ */
 public class Logs : PageModel
 {
     private readonly ILogReader _logReader;
@@ -24,7 +28,13 @@ public class Logs : PageModel
 
     public List<LogEntry> Entries { get; set; }
 
-
+    /**
+     * A default constructor. Allows ILogReader and ILogger to be injected in. Sets
+     * up default values fot Level, ConversionType, and Entries.
+     *
+     * @param logReader- ILogReader dependency injection.
+     * @param logger- ILogger dependency injection.
+     */
     public Logs(ILogReader logReader, ILogger<Logs> logger)
     {
         _logReader = logReader;
@@ -35,6 +45,10 @@ public class Logs : PageModel
         Entries = new List<LogEntry>();
     }
 
+    /**
+     * Attempts to load the logs, redirects to an error page if there's an exception. It also filters
+     * the logs. Returns the page.
+     */
     public IActionResult OnGet()
     {
         try
@@ -48,9 +62,14 @@ public class Logs : PageModel
 
         FilterLevelLogs();
         FilterConversionTypeLog();
+
         return Page();
     }
 
+    /**
+     * Attempts to us logReader to Read the logs, turn it into a list, and put the list into the Entries list.
+     * Throws and logs if there's an exception.
+     */
     private void LoadLogs()
     {
         try
@@ -64,6 +83,10 @@ public class Logs : PageModel
         }
     }
 
+    /**
+     * Allows filtering for the Level logs using a foreach loop. If there is nothing, uses a ViewData to
+     * display a message.
+     */
     private void FilterLevelLogs()
     {
         if (string.IsNullOrEmpty(Level))
@@ -79,10 +102,15 @@ public class Logs : PageModel
         }
         if (Entries.Count == 0)
         {
-            ViewData["IfNone"] = "None of that level found";
+            ViewData["IfNone"] = "Sorry, none of that level found";
         }
 
     }
+
+    /**
+     * Allows filtering for the conversion types using a foreach loop. If there is nothing, uses a ViewData to
+     * display a message.
+     */
     private void FilterConversionTypeLog()
     {
         if (string.IsNullOrEmpty(ConversionType))
@@ -98,10 +126,13 @@ public class Logs : PageModel
         }
         if (Entries.Count == 0)
         {
-            ViewData["IfNone"] = "None of that conversion type found";
+            ViewData["IfNone"] = "Sorry, none of that conversion type found";
         }
     }
 
+    /**
+     * Allows the clear button to clear the table.
+     */
     public IActionResult OnPostResetList()
     {
         Entries.Clear();

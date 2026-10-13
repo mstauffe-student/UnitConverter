@@ -57,6 +57,8 @@ public class QuickConversions : PageModel
        {
            Console.WriteLine("Invalid input: must be a number. " + e.Message);
            ViewData["ErrorMessage"] = "Error! Invalid input value. Try again.";
+           _logger.LogWarning("Could not convert using {ConversionType} because the input was invalid: {Exception}"
+               , conversion, e.Message);
            return Page();
        }
 
@@ -64,7 +66,7 @@ public class QuickConversions : PageModel
        OutputType = _conversionService.OutputType(conversion);
 
        _logger.LogInformation("Converted {Input} using {ConversionType} with result {Result}",
-          input, conversion, Output);
+          result, conversion, Output);
 
        return Page();
    }
